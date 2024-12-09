@@ -1,0 +1,39 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1733775217
+Base_font.tres::FontFile::-1::1733775192::0::1::::<><>::res://Down Hill.ttf
+Bullet_texture.png::CompressedTexture2D::466884196940899654::1733775138::1733775218::1::::<><>::
+Camera2D.gd::GDScript::-1::1733775192::0::1::::<>Camera2D<>::
+Characters.png::CompressedTexture2D::2641032325247226425::1733775138::1733775219::1::::<><>::
+default_env.tres::Environment::-1::1733775192::0::1::::<><>::
+Down Hill.ttf::FontFile::6789397203091091690::1733775138::1733775218::1::::<><>::
+export_presets.cfg::TextFile::-1::1733775138::0::1::::<><>::
+Game.gd::GDScript::-1::1733775192::0::1::::<>Node2D<>::
+Game.tscn::PackedScene::-1::1733775192::0::1::::<><>::res://Tilesheet.png<>res://Game.gd<>res://Camera2D.gd<>res://UI.gd<>res://Winner.gd<>res://Down Hill.ttf<>res://Game_UI.gd
+Game_UI.gd::GDScript::-1::1733775192::0::1::::<>CanvasLayer<>::
+Global.gd::GDScript::-1::1733775192::0::1::::<>Node<>::
+icon.png::CompressedTexture2D::6769854184445440838::1733775138::1733775218::1::::<><>::
+Network.gd::GDScript::-1::1733775192::0::1::::<>Node<>::
+Network_setup.gd::GDScript::-1::1733775192::0::1::::<>Control<>::
+Network_setup.tscn::PackedScene::-1::1733775192::0::1::::<><>::res://Base_font.tres<>res://Network_setup.gd<>res://UI.gd
+Persistent_nodes.tscn::PackedScene::-1::1733775192::0::1::::<><>::
+Player.gd::GDScript::-1::1733775192::0::1::::<>CharacterBody2D<>::
+Player.tscn::PackedScene::-1::1733775192::0::1::::<><>::res://Player.gd<>res://Characters.png
+Player_bullet.gd::GDScript::-1::1733775192::0::1::::<>Sprite2D<>::
+Player_bullet.tscn::PackedScene::-1::1733775192::0::1::::<><>::res://Player_bullet.gd<>res://Bullet_texture.png
+README.md::TextFile::-1::1733775138::0::1::::<><>::
+Server_advertiser.gd::GDScript::-1::1733775192::0::1::::<>Node<>::
+Server_advertiser.tscn::PackedScene::-1::1733775192::0::1::::<><>::res://Server_advertiser.gd
+Server_browser.gd::GDScript::-1::1733775192::0::1::::<>Control<>::
+Server_browser.tscn::PackedScene::-1::1733775192::0::1::::<><>::res://Base_font.tres<>res://Server_browser.gd<>res://Server_listener.tscn
+Server_display.gd::GDScript::-1::1733775192::0::1::::<>Label<>::
+Server_display.tscn::PackedScene::-1::1733775192::0::1::::<><>::res://Server_display.gd<>res://Base_font.tres
+Server_listener.gd::GDScript::-1::1733775192::0::1::::<>Node<>::
+Server_listener.tscn::PackedScene::-1::1733775192::0::1::::<><>::res://Server_listener.gd
+Simple_prompt.gd::GDScript::-1::1733775192::0::1::::<>Control<>::
+Simple_prompt.tscn::PackedScene::-1::1733775192::0::1::::<><>::res://Down Hill.ttf<>res://Simple_prompt.gd
+Tilesheet.png::CompressedTexture2D::7856853537558572359::1733775138::1733775220::1::::<><>::
+UI.gd::GDScript::-1::1733775192::0::1::::<>CanvasLayer<>::
+Username_text.gd::GDScript::-1::1733775192::0::1::::<>Node2D<>::
+Username_text.tscn::PackedScene::-1::1733775192::0::1::::<><>::res://Username_text.gd<>res://Base_font.tres
+Winner.gd::GDScript::-1::1733775192::0::1::::<>Label<>::
+::res://misc/::1733775138

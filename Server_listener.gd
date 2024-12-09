@@ -8,13 +8,13 @@ var socket_udp = PacketPeerUDP.new()
 var listen_port = Network.DEFAULT_PORT
 var known_servers = {}
 
-export (int) var server_cleanup_threshold = 3
+@export var server_cleanup_threshold: int = 3
 
 func _init():
 	clean_up_timer.wait_time = server_cleanup_threshold
 	clean_up_timer.one_shot = false
 	clean_up_timer.autostart = true
-	clean_up_timer.connect("timeout", self, 'clean_up')
+	clean_up_timer.connect("timeout", Callable(self, 'clean_up'))
 	add_child(clean_up_timer)
 
 func _ready():
@@ -34,18 +34,20 @@ func _process(delta):
 		if server_ip != '' and server_port > 0:
 			if not known_servers.has(server_ip):
 				var serverMessage = array_bytes.get_string_from_ascii()
-				var gameInfo = parse_json(serverMessage)
+				var test_json_conv = JSON.new()
+				test_json_conv.parse(serverMessage)
+				var gameInfo = test_json_conv.get_data()
 				gameInfo.ip = server_ip
-				gameInfo.lastSeen = OS.get_unix_time()
+				gameInfo.lastSeen = Time.get_unix_time_from_system()
 				known_servers[server_ip] = gameInfo
 				emit_signal("new_server", gameInfo)
 				print(socket_udp.get_packet_ip())
 			else:
 				var gameInfo = known_servers[server_ip]
-				gameInfo.lastSeen = OS.get_unix_time()
+				gameInfo.lastSeen = Time.get_unix_time_from_system()
 
 func clean_up():
-	var now = OS.get_unix_time()
+	var now = Time.get_unix_time_from_system()
 	for server_ip in known_servers:
 		var serverInfo = known_servers[server_ip]
 		if (now - serverInfo.lastSeen) > server_cleanup_threshold:

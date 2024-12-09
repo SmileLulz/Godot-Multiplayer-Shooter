@@ -1,6 +1,6 @@
 extends Node
 
-export (float) var broadcast_interval = 1.0
+@export var broadcast_interval: float = 1.0
 var server_info = {"name": "LAN Game"}
 
 var socket_udp
@@ -12,9 +12,9 @@ func _enter_tree():
 	broadcast_timer.one_shot = false
 	broadcast_timer.autostart = true
 	
-	if get_tree().is_network_server():
+	if get_tree().is_server():
 		add_child(broadcast_timer)
-		broadcast_timer.connect("timeout", self, "broadcast")
+		broadcast_timer.connect("timeout", Callable(self, "broadcast"))
 		
 		socket_udp = PacketPeerUDP.new()
 		socket_udp.set_broadcast_enabled(true)
@@ -22,8 +22,8 @@ func _enter_tree():
 
 func broadcast():
 	server_info.name = Network.current_player_username
-	var packet_message = to_json(server_info)
-	var packet = packet_message.to_ascii()
+	var packet_message = JSON.new().stringify(server_info)
+	var packet = packet_message.to_ascii_buffer()
 	socket_udp.put_packet(packet)
 
 func _exit_tree():

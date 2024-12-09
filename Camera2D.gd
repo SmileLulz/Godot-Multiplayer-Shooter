@@ -8,6 +8,6 @@ func _process(delta: float) -> void:
 	else:
 		if Global.alive_players.size() >= 1:
 			if target_player == null:
-				target_player = Global.alive_players[round(rand_range(0, Global.alive_players.size() - 1))]
+				target_player = Global.alive_players[round(randf_range(0, Global.alive_players.size() - 1))]
 			else:
 				global_position = lerp(global_position, target_player.global_position, delta * 10)

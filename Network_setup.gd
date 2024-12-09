@@ -5,16 +5,16 @@ var player = load("res://Player.tscn")
 var current_spawn_location_instance_number = 1
 var current_player_for_spawn_location_number = null
 
-onready var multiplayer_config_ui = $Multiplayer_configure
-onready var username_text_edit = $Multiplayer_configure/Username_text_edit
+@onready var multiplayer_config_ui = $Multiplayer_configure
+@onready var username_text_edit = $Multiplayer_configure/Username_text_edit
 
-onready var device_ip_address = $UI/Device_ip_address
-onready var start_game = $UI/Start_game
+@onready var device_ip_address = $UI/Device_ip_address
+@onready var start_game = $UI/Start_game
 
 func _ready() -> void:
-	get_tree().connect("network_peer_connected", self, "_player_connected")
-	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
-	get_tree().connect("connected_to_server", self, "_connected_to_server")
+	get_tree().connect("peer_connected", Callable(self, "_player_connected"))
+	get_tree().connect("peer_disconnected", Callable(self, "_player_disconnected"))
+	get_tree().connect("connected_to_server", Callable(self, "_connected_to_server"))
 	
 	device_ip_address.text = Network.ip_address
 	
@@ -35,7 +35,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if get_tree().network_peer != null:
-		if get_tree().get_network_connected_peers().size() >= 1 and get_tree().is_network_server():
+		if get_tree().get_peers().size() >= 1 and get_tree().is_server():
 			start_game.show()
 		else:
 			start_game.hide()
@@ -58,7 +58,7 @@ func _on_Create_server_pressed():
 		multiplayer_config_ui.hide()
 		Network.create_server()
 	
-		instance_player(get_tree().get_network_unique_id())
+		instance_player(get_tree().get_unique_id())
 
 func _on_Join_server_pressed():
 	if username_text_edit.text != "":
@@ -68,24 +68,24 @@ func _on_Join_server_pressed():
 		Global.instance_node(load("res://Server_browser.tscn"), self)
 
 func _connected_to_server() -> void:
-	yield(get_tree().create_timer(0.1), "timeout")
-	instance_player(get_tree().get_network_unique_id())
+	await get_tree().create_timer(0.1).timeout
+	instance_player(get_tree().get_unique_id())
 
 func instance_player(id) -> void:
 	var player_instance = Global.instance_node_at_location(player, Persistent_nodes, get_node("Spawn_locations/" + str(current_spawn_location_instance_number)).global_position)
 	player_instance.name = str(id)
-	player_instance.set_network_master(id)
+	player_instance.set_multiplayer_authority(id)
 	player_instance.username = username_text_edit.text
 	current_spawn_location_instance_number += 1
 
 func _on_Start_game_pressed():
 	rpc("switch_to_game")
 
-sync func switch_to_game() -> void:
+@rpc("any_peer", "call_local") func switch_to_game() -> void:
 	for child in Persistent_nodes.get_children():
 		if child.is_in_group("Player"):
 			child.update_shoot_mode(true)
 	
-	get_tree().change_scene("res://Game.tscn")
+	get_tree().change_scene_to_file("res://Game.tscn")
 
 

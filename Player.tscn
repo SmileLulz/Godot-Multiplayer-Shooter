@@ -1,19 +1,19 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://Characters.png" type="Texture" id=2]
+[ext_resource path="res://Characters.png" type="Texture2D" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 40.0
 height = 33.0
 
-[node name="Player" type="KinematicBody2D" groups=[
+[node name="Player" type="CharacterBody2D" groups=[
 "Net",
 "Player",
 ]]
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 2 )
 offset = Vector2( 16, -6 )
@@ -37,7 +37,7 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="Shoot_point" type="Position2D" parent="."]
+[node name="Shoot_point" type="Marker2D" parent="."]
 position = Vector2( 98, 30 )
 
 [node name="Hitbox" type="Area2D" parent="."]

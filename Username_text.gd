@@ -1,9 +1,9 @@
 extends Node2D
 
 var player_following = null
-var text = "" setget text_set
+var text = "": set = text_set
 
-onready var label = $Label
+@onready var label = $Label
 
 func _process(_delta: float) -> void:
 	if player_following != null:

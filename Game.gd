@@ -4,9 +4,9 @@ var current_spawn_location_instance_number = 1
 var current_player_for_spawn_location_number = null
 
 func _ready() -> void:
-	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
+	get_tree().connect("peer_disconnected", Callable(self, "_player_disconnected"))
 	
-	if get_tree().is_network_server():
+	if get_tree().is_server():
 		setup_players_positions()
 
 func setup_players_positions() -> void:
